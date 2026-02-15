@@ -24,4 +24,7 @@ client.on('error', console.error);
 
 console.log("Token exists:", process.env.TOKEN ? "YES" : "NO");
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)
+  .then(() => console.log("Đăng nhập Discord thành công"))
+  .catch(err => console.error("Lỗi login:", err));
+
