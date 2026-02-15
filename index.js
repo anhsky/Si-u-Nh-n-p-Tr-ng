@@ -3,9 +3,8 @@ const express = require('express');
 
 const app = express();
 
-// mở port giả cho Render
 app.get('/', (req, res) => {
-  res.send('Bot is running!');
+  res.send('Bot is alive!');
 });
 
 app.listen(3000, () => {
@@ -13,23 +12,16 @@ app.listen(3000, () => {
 });
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent
-  ]
+  intents: [GatewayIntentBits.Guilds]
 });
 
 client.once('ready', () => {
   console.log(`✅ Bot online: ${client.user.tag}`);
 });
 
-client.on('messageCreate', message => {
-  if (message.author.bot) return;
+// debug lỗi
+client.on('error', console.error);
 
-  if (message.content === '!ping') {
-    message.reply('pong! 🏓');
-  }
-});
+console.log("Token exists:", process.env.TOKEN ? "YES" : "NO");
 
 client.login(process.env.TOKEN);
