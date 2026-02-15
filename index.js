@@ -1,4 +1,16 @@
 const { Client, GatewayIntentBits } = require('discord.js');
+const express = require('express');
+
+const app = express();
+
+// mở port giả cho Render
+app.get('/', (req, res) => {
+  res.send('Bot is running!');
+});
+
+app.listen(3000, () => {
+  console.log('Web server running');
+});
 
 const client = new Client({
   intents: [
